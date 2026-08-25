@@ -11,42 +11,40 @@ tags:
   - back-end
 ---
 
-When my wife and I started planning our wedding, the standard canned "custom" website templates didn't sit right with me. Paper invites get misplaced, physical RSVP cards can take weeks to arrive (if we are lucky and Canada Post isn't on strike), and an evergrowing FAQ isn't a sustainable solution. 
+When my wife and I started planning our wedding, the frequently advertised "custom" website templates didn't appeal much to me. Paper invites get misplaced, physical RSVP cards can take weeks to arrive (if we're lucky and Canada Post isn't on strike), and the evergrowing FAQ isn't a sustainable solution.
 
-I wanted something better. I could build something better.
+I wanted something better, so I built something better.
 <!--more-->
 
 ## Why a custom site
 
-Why buy an off the shelf suit, when you can get one tailored for you.
-
-I could have used one of the off-the-shelf wedding website builders. They're ok. But "ok" wasn't really good enough for a wedding, much less my own wedding. I wanted a single link that guests could open on any device, find everything they needed in a handful of seconds and act on without friction. I honestly just did not want emails with questions.
+I could have used one of the off-the-shelf wedding website builders. They're ok. But "ok" wasn't really good enough for a wedding, much less my own wedding. I wanted one link guests could open, find what they needed fast, and be done. To be honest, I just did not want countless emails with questions.
 
 I am very particular about the user experience. I am one of those users who has a custom config for everything I use. Every feature on the site started as a real question a guest asked us (before the site was even live!), or a real moment of friction I had experienced at another wedding. If it took more than 15 seconds to answer, I considered that too cumbersome.
 
 
 ## What the site does
 
-The site became the central landing page for everything wedding related. Some highlights:
+The site became the landing page for everything wedding related. Some highlights:
 
 ### Guest experience
 
 - **Fully responsive design** that works on every device, screen size, and aspect ratio.
-- **One-tap RSVP** that writes directly to a Google Sheet via a Google Apps Script REST endpoint. No third party form service, no signup required.
+- **One-tap RSVP** that writes directly to a Google Sheet via a Google Apps Script REST endpoint. No third-party form service, no signup required.
 - **Digital seating chart** searchable by either guest name or table number using a lightweight JS string search.
-- **Add to Calendar** with support for Google, iCal, Outlook, and Yahoo. Whichever ecosystem the guest prefers.
-- **Countdown timer** showing time remaining until the ceremony.
+- **Add to Calendar** with support for Google, iCal, Outlook, and Yahoo.
+- **Countdown timer** to build some hype.
 - **Embedded venue video** with a fallback image on mobile to keep things fast.
 
 ### Travel and logistics
 
-- **Interactive Google Maps** powered by the Google Maps Platform API, showing both the ceremony and reception locations with directions.
-- **Flight booking shortcut** that auto-detects the visitor's location and pre-fills the origin city and event date.
-- **Weather forecast** for the wedding date via a third-party API. Important because the ceremony was outdoors and rain is always a probability in Victoria.
+- **Interactive Google Maps** powered by the Google Maps API, showing both the ceremony and reception locations with directions.
+- **Google Flights booking button** that auto-detects the visitor's location and pre-fills the origin city and event date.
+- **Weather forecast** for the wedding date via a third-party API. The ceremony was outdoors and it's Victoria, so... rain is a real looming threat.
 
 ### Event gallery (the crowd favourite)
 
-This one was the most fun to build. Guests could upload their event photos directly through the site and watch the gallery update live for everyone else viewing it.
+I wanted our photos kept private, but still open to guests sharing their POV with us. The usual ad infested event camera apps want a subscription, an account signup, and a cloth swatch from the Dalai Lama's robes. Annoying, right? I built my own so guests could upload straight from the site and watch the gallery update live as others did the same.
 
 - A **Cloudflare Worker** handles uploads, retrievals, and CORS headers.
 - Image data is stored on a private image host.
@@ -61,16 +59,16 @@ The result was a shared, real-time photo wall that captured candid moments from 
 
 ## Retrospective
 
-Building this taught me more about shipping product than most professional projects I've worked on. I was the developer, the designer, the QA, and a user. It's not often you sit on every side of a project at once, and it makes you a lot more aware of tradeoffs. The right technical decision and the right design decision aren't always the same one. 
+I learned more building this than I have at some actual jobs. I was designing it, building it, breaking it, and using it (most of the time, all in the same day). It's not often you sit on every side of a project at once, and it makes you a lot more aware of tradeoffs. Sometimes the clean code answer and the good UX answer are different, and you just have to pick. I don't need Pentagon level security, or to do everything with 84 bytes of RAM in O(1) time. That said, getting the Apps Script CORS headers right took embarrassingly long.
 
-The reward was watching it actually work on the days leading up to the wedding and of course on the day itself. Having guests RSVP within hours of the site going live and using the gallery in real time during the reception brought a great feeling of accomplishment. A few guests told us, unprompted, that it was the smoothest wedding logistics they'd ever experienced.
+The reward was watching it actually work both in the lead up and on the big day itself. Guests were RSVPing within hours of launch, and seeing the gallery fill up live during the reception brought me a lot of joy. A few guests told us, unprompted, that it was the smoothest wedding logistics they'd ever experienced.
 
-With how much weddings cost, the cherry on top was it's all free.
+With how much weddings cost, it was refreshing to be able to pull this off for free.
 
 
 ## Stack
 
 **Frontend:** HTML, CSS, JavaScript
-**Hosting:** GitHub Pages with a custom Cloudflare-routed domain
+**Hosting:** GitHub Pages, Cloudflare domain
 **APIs & Integrations:** Google Maps Platform, Google Apps Script (RSVP + Gmail automation), Cloudflare Workers, Cloudflare KV, third-party weather API
-**Other:** Embedded YouTube with mobile fallback, multi-calendar export
+**Other:** Multi-calendar export
